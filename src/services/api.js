@@ -22,7 +22,7 @@ const all = {
     },{merge:true});
   },
 
-  getContactList:async (userId) => {
+  getContactList: async (userId) => {
     let list = [];
     
     let results = await db.collection('users').get();
@@ -40,6 +40,24 @@ const all = {
 
     return list;
   },
+
+  getChatExist: async (user, user2) => {    
+    let chatExist = false;
+    
+    let result = await db.collection('users').doc(user.id).get();
+    result = result.data();
+
+    if(result.chats){
+      result.chats.forEach(result => {
+        if (result.with === user2.id) {
+          chatExist = true;
+        }
+      });
+    }
+
+    return chatExist;
+  },
+  
 
   addNewChat: async (user, user2) => {
     

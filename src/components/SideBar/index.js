@@ -13,10 +13,10 @@ const SideBar = ({user, chatList, activeChat, setActiveChat}) => {
   return (
     <Container>
       <NewChat
-        chatList={chatList}
         user={user} 
         show={showNewChat}
         setShow={setShowNewChat}
+        setActiveChat={setActiveChat}
       />
       <Header avatar={user.avatar} setShow={setShowNewChat}/>
       <SearchArea />

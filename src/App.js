@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
-function App() {
+import Login from './components/Login';
+import SideBar from './components/SideBar';
+import ContentArea from './components/ContentArea';
+
+import GlobalStyles, { AppWindow } from './styles/GlobalStyles';
+
+const App = () => {
+
+  const [activeChat, setActiveChat] = useState([]);
+  const [chatList, setChatList] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(()=>{
+    if(user !== null){
+      let unsub = api.onChatList(user.id, setChatList);
+      return unsub;
+    }
+  }, [user]);
+
+  const handleLoginData = async (u) => {
+    let newUser = {
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL
+    };
+    // register in db
+    await api.addUser(newUser);
+    setUser(newUser);
+  }
+  
+  if(!user){
+    return (<Login onReceive={handleLoginData} />);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <AppWindow>
+        <SideBar 
+          user={user} 
+          chatList={chatList} 
+          activeChat={activeChat} 
+          setActiveChat={setActiveChat}
+        />
+        <ContentArea user={user} activeChat={activeChat} />
+      </AppWindow>      
+      <GlobalStyles />
+    </>
+  )
 }
 
 export default App;

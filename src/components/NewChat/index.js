@@ -14,7 +14,7 @@ import {
 
 import { ArrowBack } from '@material-ui/icons';
 
-const NewChat = ({user, show, setShow}) => {
+const NewChat = ({user, show, setShow, setActiveChat}) => {
 
   const [list, setList] = useState([]);
 
@@ -31,9 +31,9 @@ const NewChat = ({user, show, setShow}) => {
 
   const addNewChat = async (user2) => {
     // checking if there is already a chat
-    let chatExist = await api.getChatExist(user, user2);
-
-    if(!chatExist){
+    let chatFound = await api.getChatExist(user, user2, setActiveChat);
+    
+    if(chatFound.length === 0){
       await api.addNewChat(user, user2);
     }
 

@@ -41,8 +41,8 @@ const all = {
     return list;
   },
 
-  getChatExist: async (user, user2) => {    
-    let chatExist = false;
+  getChatExist: async (user, user2, setActiveChat) => {    
+    let chatExist = [];
     
     let result = await db.collection('users').doc(user.id).get();
     result = result.data();
@@ -50,9 +50,10 @@ const all = {
     if(result.chats){
       result.chats.forEach(result => {
         if (result.with === user2.id) {
-          chatExist = true;
+          chatExist = result;
         }
       });
+      setActiveChat(chatExist);
     }
 
     return chatExist;
@@ -86,7 +87,6 @@ const all = {
         with: user.id
       })
     });
-
   },
   
   onChatList: (userId, setChatList) => {

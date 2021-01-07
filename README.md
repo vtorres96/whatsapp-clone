@@ -8,7 +8,7 @@ Project developed with ReactJS and Firebase
   <img src="/readme-assets/Screenshot_2.png" width="600"/>
 </h1>
 <h1 align="center" >  
-  <img src="/readme-assets/Screenshot_3.png" width="300"/>
+  <img src="/readme-assets/Screenshot_3.png" width="600"/>
 </h1>
 
 <p align="center">

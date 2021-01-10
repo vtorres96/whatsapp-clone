@@ -38,4 +38,4 @@ Project developed with ReactJS and Firebase
 4. To complete the setup, add the firebase's OAuth redirect URI to your Facebook application setup, after copying the URI into the firebase, just enter your facebook application and select the facebook login option by clicking on the Settings item, and paste in the field described as: valid OAuth redirect URIs.<br/>
 5. Add your API KEY in file `firebaseCofing.js`.<br/>
 6. Run `npm install` or `yarn install`.<br/>
-7. Run `npm install` or `yarn start`.<br/>
+7. Run `npm start` or `yarn start`.<br/>
